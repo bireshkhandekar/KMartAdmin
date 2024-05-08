@@ -1,2 +1,7 @@
-# KMartAdmin
-This is a Krushna Mart Admin panel
+# KmartAdmin
+
+A new Flutter project.
+
+## Getting Started
+
+FlutterFlow projects are built to run on the Flutter _stable_ release.
