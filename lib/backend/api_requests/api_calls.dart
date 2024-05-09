@@ -70,6 +70,30 @@ class GetItemsCall {
 
 /// End KMartApi Group Code
 
+class UploadimgCall {
+  static Future<ApiCallResponse> call({
+    String? key = '',
+    FFUploadedFile? image,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'uploadimg',
+      apiUrl: 'https://api.imgbb.com/1/upload',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'key': key,
+        'image': image,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

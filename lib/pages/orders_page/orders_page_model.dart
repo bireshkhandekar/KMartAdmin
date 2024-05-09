@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/components/sidebar/sidebar_widget.dart';
 import '/components/topbar/topbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,6 +13,12 @@ class OrdersPageModel extends FlutterFlowModel<OrdersPageWidget> {
   late SidebarModel sidebarModel;
   // Model for topbar component.
   late TopbarModel topbarModel;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Backend Call - API (uploadimg)] action in Button widget.
+  ApiCallResponse? apiResultv18;
 
   @override
   void initState(BuildContext context) {
