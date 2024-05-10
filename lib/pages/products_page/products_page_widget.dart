@@ -1,4 +1,5 @@
 import '/backend/schema/structs/index.dart';
+import '/components/add_product/add_product_widget.dart';
 import '/components/sidebar/sidebar_widget.dart';
 import '/components/topbar/topbar_widget.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
@@ -242,56 +243,98 @@ class _ProductsPageWidgetState extends State<ProductsPageWidget> {
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 12.0, 0.0),
-                                            child: FFButtonWidget(
-                                              onPressed: () {
-                                                print('Button pressed ...');
-                                              },
-                                              text: 'Add New Product',
-                                              icon: const Icon(
-                                                Icons.add,
-                                                size: 18.0,
-                                              ),
-                                              options: FFButtonOptions(
-                                                height: 50.0,
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        12.0, 0.0, 12.0, 0.0),
-                                                iconPadding:
-                                                    const EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
+                                          Builder(
+                                            builder: (context) => Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 12.0, 0.0),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (dialogContext) {
+                                                      return Dialog(
+                                                        elevation: 0,
+                                                        insetPadding:
+                                                            EdgeInsets.zero,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        alignment:
+                                                            const AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                        child: GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
                                                                       context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          fontSize: 18.0,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: const SizedBox(
+                                                            height: 480.0,
+                                                            width: 650.0,
+                                                            child:
+                                                                AddProductWidget(),
+                                                          ),
                                                         ),
-                                                elevation: 3.0,
-                                                borderSide: const BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1.0,
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      setState(() {}));
+                                                },
+                                                text: 'Add New Product',
+                                                icon: const Icon(
+                                                  Icons.add,
+                                                  size: 18.0,
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
+                                                options: FFButtonOptions(
+                                                  height: 50.0,
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          12.0, 0.0, 12.0, 0.0),
+                                                  iconPadding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .override(
+                                                            fontFamily:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily,
+                                                            color: Colors.white,
+                                                            fontSize: 18.0,
+                                                            letterSpacing: 0.0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                .containsKey(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmallFamily),
+                                                          ),
+                                                  elevation: 3.0,
+                                                  borderSide: const BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                showLoadingIndicator: false,
                                               ),
                                             ),
                                           ),
@@ -725,7 +768,7 @@ class _ProductsPageWidgetState extends State<ProductsPageWidget> {
                                                               .primary,
                                                       borderRadius: 10.0,
                                                       borderWidth: 1.0,
-                                                      buttonSize: 35.0,
+                                                      buttonSize: 30.0,
                                                       fillColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -736,7 +779,7 @@ class _ProductsPageWidgetState extends State<ProductsPageWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryText,
-                                                        size: 19.0,
+                                                        size: 14.0,
                                                       ),
                                                       onPressed: () {
                                                         print(
@@ -750,7 +793,7 @@ class _ProductsPageWidgetState extends State<ProductsPageWidget> {
                                                               .primary,
                                                       borderRadius: 10.0,
                                                       borderWidth: 1.0,
-                                                      buttonSize: 35.0,
+                                                      buttonSize: 30.0,
                                                       fillColor:
                                                           const Color(0xFFF38A8E),
                                                       icon: Icon(
@@ -759,7 +802,7 @@ class _ProductsPageWidgetState extends State<ProductsPageWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryText,
-                                                        size: 21.0,
+                                                        size: 16.0,
                                                       ),
                                                       onPressed: () async {
                                                         var confirmDialogResponse =

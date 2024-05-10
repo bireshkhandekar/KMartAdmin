@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'dashboard_page_model.dart';
@@ -29,11 +29,6 @@ class _DashboardPageWidgetState extends State<DashboardPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DashboardPageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultItems = await KMartApiGroup.getItemsCall.call();
-    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -1115,239 +1110,243 @@ class _DashboardPageWidgetState extends State<DashboardPageWidget> {
                                                                   .secondaryText,
                                                             ),
                                                             Expanded(
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            4.0,
-                                                                            4.0,
-                                                                            4.0,
-                                                                            4.0),
-                                                                child: Builder(
-                                                                  builder:
-                                                                      (context) {
-                                                                    final item = KMartApiGroup
-                                                                            .getItemsCall
-                                                                            .items(
-                                                                              (_model.apiResultItems?.jsonBody ?? ''),
-                                                                            )
-                                                                            ?.toList() ??
-                                                                        [];
-                                                                    return FlutterFlowDataTable<
-                                                                        dynamic>(
-                                                                      controller:
-                                                                          _model
-                                                                              .paginatedDataTableController2,
-                                                                      data:
-                                                                          item,
-                                                                      columnsBuilder:
-                                                                          (onSortChanged) =>
-                                                                              [
-                                                                        DataColumn2(
-                                                                          label:
-                                                                              DefaultTextStyle.merge(
-                                                                            softWrap:
-                                                                                true,
-                                                                            child:
-                                                                                Text(
-                                                                              'Product Name',
-                                                                              style: FlutterFlowTheme.of(context).labelLarge.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
-                                                                                  ),
-                                                                            ),
-                                                                          ),
+                                                              child: FutureBuilder<
+                                                                  ApiCallResponse>(
+                                                                future: KMartApiGroup
+                                                                    .getItemsCall
+                                                                    .call(),
+                                                                builder: (context,
+                                                                    snapshot) {
+                                                                  // Customize what your widget looks like when it's loading.
+                                                                  if (!snapshot
+                                                                      .hasData) {
+                                                                    return Center(
+                                                                      child:
+                                                                          SizedBox(
+                                                                        width:
+                                                                            50.0,
+                                                                        height:
+                                                                            50.0,
+                                                                        child:
+                                                                            SpinKitCircle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          size:
+                                                                              50.0,
                                                                         ),
-                                                                        DataColumn2(
-                                                                          label:
-                                                                              DefaultTextStyle.merge(
-                                                                            softWrap:
-                                                                                true,
-                                                                            child:
-                                                                                Text(
-                                                                              'Weight',
-                                                                              style: FlutterFlowTheme.of(context).labelLarge.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                        DataColumn2(
-                                                                          label:
-                                                                              DefaultTextStyle.merge(
-                                                                            softWrap:
-                                                                                true,
-                                                                            child:
-                                                                                Text(
-                                                                              'Price',
-                                                                              style: FlutterFlowTheme.of(context).labelLarge.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                        DataColumn2(
-                                                                          label:
-                                                                              DefaultTextStyle.merge(
-                                                                            softWrap:
-                                                                                true,
-                                                                            child:
-                                                                                Text(
-                                                                              'Discount Amount',
-                                                                              style: FlutterFlowTheme.of(context).labelLarge.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                        DataColumn2(
-                                                                          label:
-                                                                              DefaultTextStyle.merge(
-                                                                            softWrap:
-                                                                                true,
-                                                                            child:
-                                                                                Text(
-                                                                              'Details',
-                                                                              style: FlutterFlowTheme.of(context).labelLarge.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                      dataRowBuilder: (itemItem,
-                                                                              itemIndex,
-                                                                              selected,
-                                                                              onSelectChanged) =>
-                                                                          DataRow(
-                                                                        color: MaterialStateProperty.all(
-                                                                            FlutterFlowTheme.of(context).secondaryBackground),
-                                                                        cells: [
-                                                                          Text(
-                                                                            getJsonField(
-                                                                              itemItem,
-                                                                              r'''$.name''',
-                                                                            ).toString(),
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                  letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                ),
-                                                                          ),
-                                                                          Text(
-                                                                            getJsonField(
-                                                                              itemItem,
-                                                                              r'''$.weight''',
-                                                                            ).toString(),
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                  letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                ),
-                                                                          ),
-                                                                          Text(
-                                                                            '₹ 34',
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                  letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                ),
-                                                                          ),
-                                                                          Text(
-                                                                            '₹ 3',
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                  letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                ),
-                                                                          ),
-                                                                          FFButtonWidget(
-                                                                            onPressed:
-                                                                                () {
-                                                                              print('Button pressed ...');
-                                                                            },
-                                                                            text:
-                                                                                'View',
-                                                                            options:
-                                                                                FFButtonOptions(
-                                                                              height: 30.0,
-                                                                              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                                                                              iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                                                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                                                    fontSize: 14.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
-                                                                                  ),
-                                                                              elevation: 1.0,
-                                                                              borderSide: BorderSide(
-                                                                                color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                width: 0.5,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.circular(8.0),
-                                                                            ),
-                                                                          ),
-                                                                        ]
-                                                                            .map((c) =>
-                                                                                DataCell(c))
-                                                                            .toList(),
                                                                       ),
-                                                                      paginated:
-                                                                          true,
-                                                                      selectable:
-                                                                          false,
-                                                                      hidePaginator:
-                                                                          false,
-                                                                      showFirstLastButtons:
-                                                                          false,
-                                                                      headingRowHeight:
-                                                                          56.0,
-                                                                      dataRowHeight:
-                                                                          40.0,
-                                                                      columnSpacing:
-                                                                          20.0,
-                                                                      headingRowColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .primaryBackground,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              0.0),
-                                                                      addHorizontalDivider:
-                                                                          true,
-                                                                      addTopAndBottomDivider:
-                                                                          true,
-                                                                      hideDefaultHorizontalDivider:
-                                                                          true,
-                                                                      horizontalDividerColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .alternate,
-                                                                      horizontalDividerThickness:
-                                                                          1.0,
-                                                                      addVerticalDivider:
-                                                                          true,
-                                                                      verticalDividerColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .alternate,
-                                                                      verticalDividerThickness:
-                                                                          1.0,
                                                                     );
-                                                                  },
-                                                                ),
+                                                                  }
+                                                                  final containerGetItemsResponse =
+                                                                      snapshot
+                                                                          .data!;
+                                                                  return Container(
+                                                                    decoration:
+                                                                        const BoxDecoration(),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          4.0,
+                                                                          4.0,
+                                                                          4.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Builder(
+                                                                        builder:
+                                                                            (context) {
+                                                                          final item = KMartApiGroup.getItemsCall
+                                                                                  .items(
+                                                                                    containerGetItemsResponse.jsonBody,
+                                                                                  )
+                                                                                  ?.toList() ??
+                                                                              [];
+                                                                          return FlutterFlowDataTable<
+                                                                              dynamic>(
+                                                                            controller:
+                                                                                _model.paginatedDataTableController2,
+                                                                            data:
+                                                                                item,
+                                                                            columnsBuilder: (onSortChanged) =>
+                                                                                [
+                                                                              DataColumn2(
+                                                                                label: DefaultTextStyle.merge(
+                                                                                  softWrap: true,
+                                                                                  child: Text(
+                                                                                    'Product Name',
+                                                                                    style: FlutterFlowTheme.of(context).labelLarge.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
+                                                                                          fontSize: 16.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              DataColumn2(
+                                                                                label: DefaultTextStyle.merge(
+                                                                                  softWrap: true,
+                                                                                  child: Text(
+                                                                                    'Weight',
+                                                                                    style: FlutterFlowTheme.of(context).labelLarge.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
+                                                                                          fontSize: 16.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              DataColumn2(
+                                                                                label: DefaultTextStyle.merge(
+                                                                                  softWrap: true,
+                                                                                  child: Text(
+                                                                                    'Price',
+                                                                                    style: FlutterFlowTheme.of(context).labelLarge.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
+                                                                                          fontSize: 16.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              DataColumn2(
+                                                                                label: DefaultTextStyle.merge(
+                                                                                  softWrap: true,
+                                                                                  child: Text(
+                                                                                    'Discount Amount',
+                                                                                    style: FlutterFlowTheme.of(context).labelLarge.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
+                                                                                          fontSize: 16.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              DataColumn2(
+                                                                                label: DefaultTextStyle.merge(
+                                                                                  softWrap: true,
+                                                                                  child: Text(
+                                                                                    'Details',
+                                                                                    style: FlutterFlowTheme.of(context).labelLarge.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).labelLargeFamily,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelLargeFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                            dataRowBuilder: (itemItem, itemIndex, selected, onSelectChanged) =>
+                                                                                DataRow(
+                                                                              color: MaterialStateProperty.all(FlutterFlowTheme.of(context).secondaryBackground),
+                                                                              cells: [
+                                                                                Text(
+                                                                                  getJsonField(
+                                                                                    itemItem,
+                                                                                    r'''$.name''',
+                                                                                  ).toString(),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                        letterSpacing: 0.0,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                      ),
+                                                                                ),
+                                                                                Text(
+                                                                                  getJsonField(
+                                                                                    itemItem,
+                                                                                    r'''$.weight''',
+                                                                                  ).toString(),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                        letterSpacing: 0.0,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                      ),
+                                                                                ),
+                                                                                Text(
+                                                                                  '₹ 34',
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                        letterSpacing: 0.0,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                      ),
+                                                                                ),
+                                                                                Text(
+                                                                                  '₹ 3',
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                        letterSpacing: 0.0,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                      ),
+                                                                                ),
+                                                                                FFButtonWidget(
+                                                                                  onPressed: () {
+                                                                                    print('Button pressed ...');
+                                                                                  },
+                                                                                  text: 'View',
+                                                                                  options: FFButtonOptions(
+                                                                                    height: 30.0,
+                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                                                                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                          color: FlutterFlowTheme.of(context).primaryText,
+                                                                                          fontSize: 14.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                        ),
+                                                                                    elevation: 1.0,
+                                                                                    borderSide: BorderSide(
+                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                      width: 0.5,
+                                                                                    ),
+                                                                                    borderRadius: BorderRadius.circular(8.0),
+                                                                                  ),
+                                                                                ),
+                                                                              ].map((c) => DataCell(c)).toList(),
+                                                                            ),
+                                                                            paginated:
+                                                                                true,
+                                                                            selectable:
+                                                                                false,
+                                                                            hidePaginator:
+                                                                                false,
+                                                                            showFirstLastButtons:
+                                                                                false,
+                                                                            headingRowHeight:
+                                                                                56.0,
+                                                                            dataRowHeight:
+                                                                                40.0,
+                                                                            columnSpacing:
+                                                                                20.0,
+                                                                            headingRowColor:
+                                                                                FlutterFlowTheme.of(context).primaryBackground,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(0.0),
+                                                                            addHorizontalDivider:
+                                                                                true,
+                                                                            addTopAndBottomDivider:
+                                                                                true,
+                                                                            hideDefaultHorizontalDivider:
+                                                                                true,
+                                                                            horizontalDividerColor:
+                                                                                FlutterFlowTheme.of(context).alternate,
+                                                                            horizontalDividerThickness:
+                                                                                1.0,
+                                                                            addVerticalDivider:
+                                                                                true,
+                                                                            verticalDividerColor:
+                                                                                FlutterFlowTheme.of(context).alternate,
+                                                                            verticalDividerThickness:
+                                                                                1.0,
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
                                                               ),
                                                             ),
                                                           ],

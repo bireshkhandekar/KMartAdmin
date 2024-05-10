@@ -13,9 +13,13 @@ class KMartApiGroup {
   static String baseUrl = 'http://api.rajastechnologies.com:5001';
   static Map<String, String> headers = {
     'accept': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE, HEAD',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
   };
   static GetProductsCall getProductsCall = GetProductsCall();
   static GetItemsCall getItemsCall = GetItemsCall();
+  static AddProductCall addProductCall = AddProductCall();
 }
 
 class GetProductsCall {
@@ -26,6 +30,9 @@ class GetProductsCall {
       callType: ApiCallType.GET,
       headers: {
         'accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE, HEAD',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
       },
       params: {},
       returnBody: true,
@@ -51,6 +58,9 @@ class GetItemsCall {
       callType: ApiCallType.GET,
       headers: {
         'accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE, HEAD',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
       },
       params: {},
       returnBody: true,
@@ -66,6 +76,48 @@ class GetItemsCall {
         r'''$[:]''',
         true,
       ) as List?;
+}
+
+class AddProductCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? description = '',
+    String? weight = '',
+    int? categoryId,
+    double? discountAmount,
+    double? mrp,
+    String? image = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "name": "$name",
+  "description": "$description",
+  "weight": "$weight",
+  "category_id": $categoryId,
+  "discount_amount": $discountAmount,
+  "image": "$image",
+  "mrp": $mrp
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Add Product',
+      apiUrl: '${KMartApiGroup.baseUrl}/item',
+      callType: ApiCallType.POST,
+      headers: {
+        'accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE, HEAD',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End KMartApi Group Code
@@ -92,6 +144,29 @@ class UploadimgCall {
       alwaysAllowBody: false,
     );
   }
+}
+
+class ProductCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'product',
+      apiUrl: 'http://api.rajastechnologies.com:5001/items',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? product(dynamic response) => getJsonField(
+        response,
+        r'''$[:]''',
+        true,
+      ) as List?;
 }
 
 class ApiPagingParams {

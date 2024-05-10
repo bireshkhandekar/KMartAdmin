@@ -359,7 +359,7 @@ class _UsersPageWidgetState extends State<UsersPageWidget> {
                                                             .primary,
                                                     borderRadius: 10.0,
                                                     borderWidth: 1.0,
-                                                    buttonSize: 35.0,
+                                                    buttonSize: 30.0,
                                                     fillColor:
                                                         const Color(0xFF78E8DD),
                                                     icon: Icon(
@@ -368,7 +368,7 @@ class _UsersPageWidgetState extends State<UsersPageWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
-                                                      size: 20.0,
+                                                      size: 15.0,
                                                     ),
                                                     onPressed: () {
                                                       print(
@@ -384,7 +384,7 @@ class _UsersPageWidgetState extends State<UsersPageWidget> {
                                                               .primary,
                                                       borderRadius: 10.0,
                                                       borderWidth: 1.0,
-                                                      buttonSize: 35.0,
+                                                      buttonSize: 30.0,
                                                       fillColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -395,7 +395,7 @@ class _UsersPageWidgetState extends State<UsersPageWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryText,
-                                                        size: 19.0,
+                                                        size: 16.0,
                                                       ),
                                                       onPressed: () async {
                                                         await showDialog(
@@ -449,7 +449,7 @@ class _UsersPageWidgetState extends State<UsersPageWidget> {
                                                             .primary,
                                                     borderRadius: 10.0,
                                                     borderWidth: 1.0,
-                                                    buttonSize: 35.0,
+                                                    buttonSize: 30.0,
                                                     fillColor:
                                                         const Color(0xFFF38A8E),
                                                     icon: Icon(
@@ -458,7 +458,7 @@ class _UsersPageWidgetState extends State<UsersPageWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryText,
-                                                      size: 21.0,
+                                                      size: 14.0,
                                                     ),
                                                     onPressed: () async {
                                                       var confirmDialogResponse =

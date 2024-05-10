@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/sidebar/sidebar_widget.dart';
 import '/components/topbar/topbar_widget.dart';
@@ -11,8 +10,6 @@ class DashboardPageModel extends FlutterFlowModel<DashboardPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (getItems)] action in DashboardPage widget.
-  ApiCallResponse? apiResultItems;
   // Model for sidebar component.
   late SidebarModel sidebarModel;
   // Model for topbar component.

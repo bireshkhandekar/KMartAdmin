@@ -1,6 +1,7 @@
-import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/components/sidebar/sidebar_widget.dart';
 import '/components/topbar/topbar_widget.dart';
+import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'orders_page_widget.dart' show OrdersPageWidget;
 import 'package:flutter/material.dart';
@@ -13,12 +14,13 @@ class OrdersPageModel extends FlutterFlowModel<OrdersPageWidget> {
   late SidebarModel sidebarModel;
   // Model for topbar component.
   late TopbarModel topbarModel;
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-
-  // Stores action output result for [Backend Call - API (uploadimg)] action in Button widget.
-  ApiCallResponse? apiResultv18;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
+  // State field(s) for PaginatedDataTable widget.
+  final paginatedDataTableController =
+      FlutterFlowDataTableController<ProductsStruct>();
 
   @override
   void initState(BuildContext context) {
@@ -31,5 +33,7 @@ class OrdersPageModel extends FlutterFlowModel<OrdersPageWidget> {
     unfocusNode.dispose();
     sidebarModel.dispose();
     topbarModel.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 }
