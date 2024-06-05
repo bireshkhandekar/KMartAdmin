@@ -1,10 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'editusers_widget.dart' show EditusersWidget;
+import 'edit_product_widget.dart' show EditProductWidget;
 import 'package:flutter/material.dart';
 
-class EditusersModel extends FlutterFlowModel<EditusersWidget> {
+class EditProductModel extends FlutterFlowModel<EditProductWidget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
@@ -20,6 +20,12 @@ class EditusersModel extends FlutterFlowModel<EditusersWidget> {
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
   String? Function(BuildContext, String?)? textController3Validator;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Backend Call - API (uploadimg)] action in Container widget.
+  ApiCallResponse? apiResultuploaded;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode4;
   TextEditingController? textController4;
@@ -28,23 +34,13 @@ class EditusersModel extends FlutterFlowModel<EditusersWidget> {
   FocusNode? textFieldFocusNode5;
   TextEditingController? textController5;
   String? Function(BuildContext, String?)? textController5Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode6;
-  TextEditingController? textController6;
-  String? Function(BuildContext, String?)? textController6Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode7;
-  TextEditingController? textController7;
-  String? Function(BuildContext, String?)? textController7Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode8;
-  TextEditingController? textController8;
-  String? Function(BuildContext, String?)? textController8Validator;
   // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
-  // Stores action output result for [Backend Call - API (user Update )] action in Button widget.
-  ApiCallResponse? userUpdateResult;
+  int? dropDownValue;
+  FormFieldController<int>? dropDownValueController;
+  // State field(s) for Switch widget.
+  bool? switchValue;
+  // Stores action output result for [Backend Call - API (update Product)] action in Button widget.
+  ApiCallResponse? apiResulupdteproduct;
 
   @override
   void initState(BuildContext context) {}
@@ -65,14 +61,5 @@ class EditusersModel extends FlutterFlowModel<EditusersWidget> {
 
     textFieldFocusNode5?.dispose();
     textController5?.dispose();
-
-    textFieldFocusNode6?.dispose();
-    textController6?.dispose();
-
-    textFieldFocusNode7?.dispose();
-    textController7?.dispose();
-
-    textFieldFocusNode8?.dispose();
-    textController8?.dispose();
   }
 }

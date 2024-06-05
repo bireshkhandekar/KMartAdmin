@@ -1,15 +1,10 @@
-import '/backend/api_requests/api_calls.dart';
 import '/components/sidebar/sidebar_widget.dart';
 import '/components/topbar/topbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'users_page_widget.dart' show UsersPageWidget;
+import 'report_widget.dart' show ReportWidget;
 import 'package:flutter/material.dart';
 
-class UsersPageModel extends FlutterFlowModel<UsersPageWidget> {
-  ///  Local state fields for this page.
-
-  int? userPage = 1;
-
+class ReportModel extends FlutterFlowModel<ReportWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -17,8 +12,6 @@ class UsersPageModel extends FlutterFlowModel<UsersPageWidget> {
   late SidebarModel sidebarModel;
   // Model for topbar component.
   late TopbarModel topbarModel;
-  // Stores action output result for [Backend Call - API (user disable by user id)] action in IconButton widget.
-  ApiCallResponse? userdisableResult;
 
   @override
   void initState(BuildContext context) {

@@ -8,18 +8,41 @@ import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'add_product_model.dart';
-export 'add_product_model.dart';
+import 'edit_product_model.dart';
+export 'edit_product_model.dart';
 
-class AddProductWidget extends StatefulWidget {
-  const AddProductWidget({super.key});
+class EditProductWidget extends StatefulWidget {
+  const EditProductWidget({
+    super.key,
+    required this.name,
+    required this.description,
+    required this.weight,
+    required this.mrp,
+    required this.discount,
+    required this.categoryId,
+    required this.status,
+    required this.imageshow,
+    required this.itemId,
+    required this.image,
+  });
+
+  final String? name;
+  final String? description;
+  final String? weight;
+  final double? mrp;
+  final double? discount;
+  final int? categoryId;
+  final String? status;
+  final String? imageshow;
+  final int? itemId;
+  final String? image;
 
   @override
-  State<AddProductWidget> createState() => _AddProductWidgetState();
+  State<EditProductWidget> createState() => _EditProductWidgetState();
 }
 
-class _AddProductWidgetState extends State<AddProductWidget> {
-  late AddProductModel _model;
+class _EditProductWidgetState extends State<EditProductWidget> {
+  late EditProductModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -30,23 +53,26 @@ class _AddProductWidgetState extends State<AddProductWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AddProductModel());
+    _model = createModel(context, () => EditProductModel());
 
-    _model.textController1 ??= TextEditingController();
+    _model.textController1 ??= TextEditingController(text: widget.name);
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController2 ??= TextEditingController(text: widget.description);
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.textController3 ??= TextEditingController(text: widget.weight);
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController();
+    _model.textController4 ??=
+        TextEditingController(text: widget.mrp?.toString());
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController();
+    _model.textController5 ??=
+        TextEditingController(text: widget.discount?.toString());
     _model.textFieldFocusNode5 ??= FocusNode();
 
+    _model.switchValue = widget.status == 'true';
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -76,7 +102,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Add Products',
+                  'Update Product',
                   style: FlutterFlowTheme.of(context).displaySmall.override(
                         fontFamily:
                             FlutterFlowTheme.of(context).displaySmallFamily,
@@ -632,78 +658,40 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                                                           Radius.circular(0.0),
                                                     ),
                                                   ),
-                                                  child: Builder(
-                                                    builder: (context) {
-                                                      if (getJsonField(
-                                                            (_model.apiResultuploaded
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                            r'''$.data.url''',
-                                                          ) !=
-                                                          null) {
-                                                        return ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                          child: Image.network(
-                                                            getJsonField(
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Image.network(
+                                                      () {
+                                                        if (getJsonField(
                                                               (_model.apiResultuploaded
                                                                       ?.jsonBody ??
                                                                   ''),
                                                               r'''$.data.url''',
-                                                            ).toString(),
-                                                            width: 300.0,
-                                                            height: 200.0,
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                        );
-                                                      } else {
-                                                        return Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Icon(
-                                                              Icons
-                                                                  .cloud_upload_outlined,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryText,
-                                                              size: 24.0,
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'Upload Image',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      }
-                                                    },
+                                                            ) !=
+                                                            null) {
+                                                          return getJsonField(
+                                                            (_model.apiResultuploaded
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            r'''$.data.url''',
+                                                          ).toString();
+                                                        } else if (widget
+                                                                    .imageshow !=
+                                                                null &&
+                                                            widget.imageshow !=
+                                                                '') {
+                                                          return widget
+                                                              .imageshow!;
+                                                        } else {
+                                                          return 'https://media.istockphoto.com/id/535489242/photo/pouring-milk-in-the-glass-on-the-background-of-nature.jpg?s=612x612&w=0&k=20&c=bqBubtMFs_kv9z0OZVLunl3NFTb_XAVKiw8v1hO1T80=';
+                                                        }
+                                                      }(),
+                                                      width: 300.0,
+                                                      height: 200.0,
+                                                      fit: BoxFit.fill,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -954,7 +942,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                                         Padding(
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
-                                                  8.0, 0.0, 0.0, 0.0),
+                                                  8.0, 0.0, 8.0, 0.0),
                                           child: FutureBuilder<ApiCallResponse>(
                                             future: KMartApiGroup
                                                 .getCategoriesCall
@@ -982,7 +970,9 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                                                 controller: _model
                                                         .dropDownValueController ??=
                                                     FormFieldController<int>(
-                                                        null),
+                                                  _model.dropDownValue ??=
+                                                      widget.categoryId,
+                                                ),
                                                 options: List<int>.from(
                                                     KMartApiGroup
                                                         .getCategoriesCall
@@ -1046,6 +1036,91 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                                             },
                                           ),
                                         ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 0.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: 308.0,
+                                            height: 50.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              border: Border.all(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 2.0,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 0.0, 0.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Product Status :',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: Switch.adaptive(
+                                                      value:
+                                                          _model.switchValue!,
+                                                      onChanged:
+                                                          (newValue) async {
+                                                        setState(() =>
+                                                            _model.switchValue =
+                                                                newValue);
+                                                      },
+                                                      activeColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      activeTrackColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent1,
+                                                      inactiveTrackColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .alternate,
+                                                      inactiveThumbColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -1055,69 +1130,117 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                                       0.0, 16.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      _model.apiResuladdproduct =
-                                          await KMartApiGroup.addProductCall
-                                              .call(
-                                        name: _model.textController1.text,
-                                        description:
-                                            _model.textController2.text,
-                                        weight: _model.textController3.text,
-                                        categoryId: _model.dropDownValue,
-                                        discountAmount: double.tryParse(
-                                            _model.textController5.text),
-                                        mrp: double.tryParse(
-                                            _model.textController4.text),
-                                        image: getJsonField(
-                                          (_model.apiResultuploaded?.jsonBody ??
-                                              ''),
-                                          r'''$.data.url''',
-                                        ).toString(),
-                                        token:
-                                            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoic3VwZXJhZG1pbiIsInR5cGUiOiJhY2Nlc3MiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MTY2MjQ3MzF9.hFwTU3Sd7zh-M2yUhPDM6rKKPr9YGnGCqmQDQPyxiQg',
-                                      );
-                                      if ((_model
-                                              .apiResuladdproduct?.succeeded ??
-                                          true)) {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              content: const Text(
-                                                  'Item added successfully.'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: const Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
+                                      var confirmDialogResponse =
+                                          await showDialog<bool>(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: const Text('Alert !'),
+                                                    content: const Text(
+                                                        'Are you sure update this Item ?'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                false),
+                                                        child: const Text('Cancel'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                true),
+                                                        child: const Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ) ??
+                                              false;
+                                      if (confirmDialogResponse) {
+                                        _model.apiResulupdteproduct =
+                                            await KMartApiGroup
+                                                .updateProductCall
+                                                .call(
+                                          itemName: _model.textController1.text,
+                                          description:
+                                              _model.textController2.text,
+                                          weight: _model.textController3.text,
+                                          mrp: double.tryParse(
+                                              _model.textController4.text),
+                                          discountAmount: double.tryParse(
+                                              _model.textController5.text),
+                                          categoryId: _model.dropDownValue,
+                                          itemId: widget.itemId,
+                                          image: getJsonField(
+                                                    (_model.apiResultuploaded
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.data.url''',
+                                                  ) !=
+                                                  null
+                                              ? getJsonField(
+                                                  (_model.apiResultuploaded
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.data.url''',
+                                                ).toString()
+                                              : widget.image,
+                                          isActive:
+                                              _model.switchValue?.toString(),
                                         );
-                                        Navigator.pop(context);
+                                        if ((_model.apiResulupdteproduct
+                                                ?.succeeded ??
+                                            true)) {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                content: const Text(
+                                                    'Item updated successfully.'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: const Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          Navigator.pop(context);
+                                        } else {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                content: Text(getJsonField(
+                                                  (_model.apiResulupdteproduct
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.message''',
+                                                ).toString()),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: const Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        }
                                       } else {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              content: const Text('Item not added.'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: const Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
+                                        Navigator.pop(context);
                                       }
 
                                       setState(() {});
                                     },
-                                    text: 'Add Product',
+                                    text: 'Update Product',
                                     options: FFButtonOptions(
                                       height: 40.0,
                                       padding: const EdgeInsetsDirectional.fromSTEB(

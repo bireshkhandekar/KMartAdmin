@@ -9,9 +9,13 @@ class TopbarWidget extends StatefulWidget {
   const TopbarWidget({
     super.key,
     required this.pageName,
+    required this.count,
+    required this.tableName,
   });
 
   final String? pageName;
+  final int? count;
+  final String? tableName;
 
   @override
   State<TopbarWidget> createState() => _TopbarWidgetState();
@@ -44,7 +48,7 @@ class _TopbarWidgetState extends State<TopbarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width * 0.85,
+      width: MediaQuery.sizeOf(context).width * 0.88,
       height: MediaQuery.sizeOf(context).height * 0.08,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -56,21 +60,44 @@ class _TopbarWidgetState extends State<TopbarWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
-              child: Text(
-                valueOrDefault<String>(
-                  widget.pageName,
-                  'Page Name',
-                ),
-                style: FlutterFlowTheme.of(context).headlineLarge.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).headlineLargeFamily,
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).headlineLargeFamily),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    valueOrDefault<String>(
+                      widget.pageName,
+                      'Page Name',
                     ),
-              ),
+                    style: FlutterFlowTheme.of(context).headlineLarge.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).headlineLargeFamily,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).headlineLargeFamily),
+                        ),
+                  ),
+                ),
+                if (widget.pageName != 'Dashboard')
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 6.0),
+                    child: Text(
+                      '${widget.count?.toString()} ${widget.tableName} found',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 12.0,
+                            letterSpacing: 0.0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyMediumFamily),
+                          ),
+                    ),
+                  ),
+              ],
             ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
@@ -88,7 +115,7 @@ class _TopbarWidgetState extends State<TopbarWidget> {
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      'biresh',
+                      'Biresh',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyMediumFamily,

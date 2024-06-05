@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/components/sidebar/sidebar_widget.dart';
 import '/components/topbar/topbar_widget.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
@@ -16,7 +15,7 @@ class DashboardPageModel extends FlutterFlowModel<DashboardPageWidget> {
   late TopbarModel topbarModel;
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController1 =
-      FlutterFlowDataTableController<OrdersStruct>();
+      FlutterFlowDataTableController<dynamic>();
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController2 =
       FlutterFlowDataTableController<dynamic>();

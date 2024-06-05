@@ -143,4 +143,10 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInUsers(int index, UsersStruct value) {
     _users.insert(index, value);
   }
+
+  bool _customDates = false;
+  bool get customDates => _customDates;
+  set customDates(bool value) {
+    _customDates = value;
+  }
 }

@@ -1,12 +1,15 @@
-import '/backend/schema/structs/index.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/components/sidebar/sidebar_widget.dart';
 import '/components/topbar/topbar_widget.dart';
-import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'products_page_widget.dart' show ProductsPageWidget;
 import 'package:flutter/material.dart';
 
 class ProductsPageModel extends FlutterFlowModel<ProductsPageWidget> {
+  ///  Local state fields for this page.
+
+  int? productPage = 1;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -18,9 +21,8 @@ class ProductsPageModel extends FlutterFlowModel<ProductsPageWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // State field(s) for PaginatedDataTable widget.
-  final paginatedDataTableController =
-      FlutterFlowDataTableController<ProductsStruct>();
+  // Stores action output result for [Backend Call - API (item disable by item id)] action in IconButton widget.
+  ApiCallResponse? resultitemdisable;
 
   @override
   void initState(BuildContext context) {

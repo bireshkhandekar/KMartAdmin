@@ -1,13 +1,39 @@
+import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'editusers_model.dart';
 export 'editusers_model.dart';
 
 class EditusersWidget extends StatefulWidget {
-  const EditusersWidget({super.key});
+  const EditusersWidget({
+    super.key,
+    required this.userId,
+    required this.name,
+    required this.moblieNumber,
+    required this.houseNo,
+    required this.lineNo,
+    required this.landMark,
+    required this.city,
+    required this.state,
+    required this.pinCode,
+    required this.status,
+  });
+
+  final int? userId;
+  final String? name;
+  final String? moblieNumber;
+  final String? houseNo;
+  final String? lineNo;
+  final String? landMark;
+  final String? city;
+  final String? state;
+  final int? pinCode;
+  final String? status;
 
   @override
   State<EditusersWidget> createState() => _EditusersWidgetState();
@@ -27,28 +53,29 @@ class _EditusersWidgetState extends State<EditusersWidget> {
     super.initState();
     _model = createModel(context, () => EditusersModel());
 
-    _model.textController1 ??= TextEditingController(text: 'biresh');
+    _model.textController1 ??= TextEditingController(text: widget.name);
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController(text: '8308910530');
+    _model.textController2 ??= TextEditingController(text: widget.moblieNumber);
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController(text: 'Sai');
+    _model.textController3 ??= TextEditingController(text: widget.houseNo);
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController(text: '10');
+    _model.textController4 ??= TextEditingController(text: widget.lineNo);
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController(text: 'Nandani Naka');
+    _model.textController5 ??= TextEditingController(text: widget.landMark);
     _model.textFieldFocusNode5 ??= FocusNode();
 
-    _model.textController6 ??= TextEditingController(text: 'Jaysingpur');
+    _model.textController6 ??= TextEditingController(text: widget.city);
     _model.textFieldFocusNode6 ??= FocusNode();
 
-    _model.textController7 ??= TextEditingController(text: 'Maharastra');
+    _model.textController7 ??= TextEditingController(text: widget.state);
     _model.textFieldFocusNode7 ??= FocusNode();
 
-    _model.textController8 ??= TextEditingController(text: '416101');
+    _model.textController8 ??=
+        TextEditingController(text: widget.pinCode?.toString());
     _model.textFieldFocusNode8 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -638,7 +665,7 @@ class _EditusersWidgetState extends State<EditusersWidget> {
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 8.0),
+                              0.0, 0.0, 0.0, 10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -827,10 +854,111 @@ class _EditusersWidgetState extends State<EditusersWidget> {
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 8.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowDropDown<String>(
+                                  controller: _model.dropDownValueController ??=
+                                      FormFieldController<String>(
+                                    _model.dropDownValue ??= widget.status,
+                                  ),
+                                  options: const ['active', 'disabled'],
+                                  onChanged: (val) => setState(
+                                      () => _model.dropDownValue = val),
+                                  width: 233.0,
+                                  height: 50.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  elevation: 2.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  borderWidth: 2.0,
+                                  borderRadius: 8.0,
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isOverButton: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 8.0, 0.0, 0.0),
                           child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: const Text('Alert !'),
+                                            content: const Text(
+                                                'Are you sure update user ?'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child: const Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child: const Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
+                              if (confirmDialogResponse) {
+                                _model.userUpdateResult =
+                                    await KMartApiGroup.userUpdateCall.call(
+                                  userId: widget.userId,
+                                  name: _model.textController1.text,
+                                  moblieNumber: _model.textController2.text,
+                                  houseno: _model.textController3.text,
+                                  landmark: _model.textController5.text,
+                                  lineno: _model.textController4.text,
+                                  city: _model.textController6.text,
+                                  pincode:
+                                      int.tryParse(_model.textController8.text),
+                                  state: _model.textController7.text,
+                                  status: _model.dropDownValue,
+                                );
+                                if ((_model.userUpdateResult?.succeeded ??
+                                    true)) {
+                                  Navigator.pop(context);
+                                } else {
+                                  Navigator.pop(context);
+                                }
+                              }
+
+                              setState(() {});
                             },
                             text: 'Update',
                             options: FFButtonOptions(
@@ -859,6 +987,7 @@ class _EditusersWidgetState extends State<EditusersWidget> {
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
+                            showLoadingIndicator: false,
                           ),
                         ),
                       ],

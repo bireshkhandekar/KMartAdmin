@@ -35,10 +35,8 @@ class AddProductModel extends FlutterFlowModel<AddProductWidget> {
   TextEditingController? textController5;
   String? Function(BuildContext, String?)? textController5Validator;
   // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
-  // State field(s) for Switch widget.
-  bool switchValue = true;
+  int? dropDownValue;
+  FormFieldController<int>? dropDownValueController;
   // Stores action output result for [Backend Call - API (Add Product)] action in Button widget.
   ApiCallResponse? apiResuladdproduct;
 
